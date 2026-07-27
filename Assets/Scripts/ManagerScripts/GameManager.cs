@@ -20,4 +20,9 @@ public class GameManager : MonoBehaviour
         score_value += 1;
         score_text.text = "Score: " + score_value;
     }
+
+    public void Death()
+    {
+        Debug.Log("you lost :(");
+    }
 }

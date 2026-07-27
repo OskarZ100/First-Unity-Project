@@ -7,7 +7,6 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 0.02f; 
     void Update()
     {
-        Debug.Log(speed);
         //Using move towards
         transform.position = Vector3.MoveTowards(
             transform.position,  //the thing thats moving position 
