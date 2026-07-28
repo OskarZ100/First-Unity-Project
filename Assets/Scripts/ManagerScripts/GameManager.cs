@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    public GameObject player;
     public static GameManager instance;
     [SerializeField] private TextMeshProUGUI score_text;
 
@@ -24,5 +26,14 @@ public class GameManager : MonoBehaviour
     public void Death()
     {
         Debug.Log("you lost :(");
+        
+        player.GetComponent<PlayerMovement>().enabled = false;
+
+
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<EnemyMovement>().enabled = false;
+        }
     }
 }

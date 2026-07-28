@@ -406,6 +406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581ec77b096481441944b8ace64416c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 1050709334}
   score_text: {fileID: 1511906766}
 --- !u!4 &518938591
 Transform:
