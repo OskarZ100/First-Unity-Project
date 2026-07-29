@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
@@ -27,6 +28,20 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && playerjump.isGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && GameManager.gameStarted)
+        {
+            if (GameManager.instance.isPaused)
+            {
+                GameManager.instance.isPaused = false;
+            }
+            else
+            {
+                GameManager.instance.isPaused = true;
+            }
+            GameManager.instance.Pause();
+            return;
         }
 
 
