@@ -14,11 +14,13 @@ public class GameManager : MonoBehaviour
 
     public static bool gameStarted = false;
     public bool isPaused = false;
+    public static int hi_score = 0;
 
 
     public GameObject player;
     public static GameManager instance;
     [SerializeField] private TextMeshProUGUI score_text;
+    [SerializeField] private TextMeshProUGUI hi_score_txt;
 
     //ScoreGUI
     private int score_value = 0;
@@ -40,7 +42,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         gameStarted = true;
-
+        hi_score_txt.text = "HI: " + hi_score;
         Vector3 new_cam_pos = new Vector3(-0.1f,4.7f,-11.8f);
         mainCam.transform.localPosition = new_cam_pos;
         startMenu.SetActive(false);
@@ -49,8 +51,14 @@ public class GameManager : MonoBehaviour
 
     public void AddScore()
     {
+        
         score_value += 1;
         score_text.text = "Score: " + score_value;
+        if(score_value > hi_score)
+        {
+            hi_score = score_value;
+            hi_score_txt.text = "HI: " + hi_score;
+        }
     }
 
     public void Death()
