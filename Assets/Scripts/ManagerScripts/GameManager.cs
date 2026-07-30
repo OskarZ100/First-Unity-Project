@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject deathMenu;
     [SerializeField] private GameObject pauseMenu;
 
+    [SerializeField] private GameObject enemy;
+
     public static bool gameStarted = false;
     public bool isPaused = false;
     public static int hi_score = 0;
@@ -59,6 +61,16 @@ public class GameManager : MonoBehaviour
             hi_score = score_value;
             hi_score_txt.text = "HI: " + hi_score;
         }
+
+        if(score_value % 5 == 0)
+        {
+            SpawnEnemy();
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<EnemyMovement>().speed += 1;
+            }
+        }
     }
 
     public void Death()
@@ -99,6 +111,15 @@ public class GameManager : MonoBehaviour
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
         }
+    }
+
+    public void SpawnEnemy()
+    {
+        float rand_z = Random.Range(-14,22);
+        float rand_x = Random.Range(-15,10);
+        Vector3 enemy_spawn = new Vector3(rand_x, 10f, rand_z);
+
+        Instantiate(enemy, enemy_spawn, Quaternion.identity);
     }
 
 }

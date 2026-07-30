@@ -4,9 +4,16 @@ using UnityEngine.UIElements;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    public float speed = 0.02f; 
+    
+    public float speed = 0.02f;
+
+    void Start()
+    {
+        player = GameManager.instance.player;
+    } 
     void Update()
     {
+        
         //Using move towards
         transform.position = Vector3.MoveTowards(
             transform.position,  //the thing thats moving position 
