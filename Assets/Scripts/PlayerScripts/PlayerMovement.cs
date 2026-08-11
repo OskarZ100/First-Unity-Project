@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     //Grounded Script 
     [SerializeField] private PlayerJump playerjump; 
     [SerializeField] private Rigidbody rb; 
+    [SerializeField] private GameObject skin;
     public float jumpForce = 5f; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -53,6 +54,15 @@ public class PlayerMovement : MonoBehaviour
 
         transform.position += movement * player_speed * Time.deltaTime;
 
+
+        //Will check if being moved at all
+        //Then will use a quat value and point at the direction of movement using like built in func
+        //added an offset because my model imported weird and all
+        if (movement.magnitude > 0.1f)
+        {
+            skin.transform.rotation = Quaternion.LookRotation(movement) * Quaternion.Euler(-89.98f, 90, 0);
+        }
+        
         
     }
 }
