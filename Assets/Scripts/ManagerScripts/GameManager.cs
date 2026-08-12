@@ -122,4 +122,9 @@ public class GameManager : MonoBehaviour
         Instantiate(enemy, enemy_spawn, Quaternion.identity);
     }
 
+    public void speedIncrease()
+    {
+        player.GetComponent<PlayerMovement>().player_speed += 0.5f;
+    }
+
 }
