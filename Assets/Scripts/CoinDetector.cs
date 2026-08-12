@@ -4,10 +4,11 @@ using NUnit.Framework;
 public class CoinDetector : MonoBehaviour
 {
     public bool isUpgrade = false;
+    [SerializeField] private Material original;
+    [SerializeField] private Material upgrade;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -25,10 +26,8 @@ public class CoinDetector : MonoBehaviour
             {
                 GameManager.instance.speedIncrease();
             }
-            else
-            {
-                GameManager.instance.AddScore();
-            }
+            GameManager.instance.AddScore();
+            
             
             float rand_z = Random.Range(-14,22);
             float rand_x = Random.Range(-15,10);
@@ -40,13 +39,20 @@ public class CoinDetector : MonoBehaviour
     }
 
     private void resetStatus()
-    {
+    {   
+        Renderer renderer = GetComponent<Renderer>();
         System.Random rand = new System.Random();
         int randomInt = rand.Next(0, 5); 
         if(randomInt == 4)
         {
             isUpgrade = true;
             Debug.Log("UPGRADEEE");
+            renderer.material = upgrade;
+        }
+        else
+        {   
+            renderer.material = original;
+            isUpgrade = false;
         }
     }
 }
