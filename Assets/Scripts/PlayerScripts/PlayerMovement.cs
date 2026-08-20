@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerJump playerjump; 
     [SerializeField] private Rigidbody rb; 
     [SerializeField] private GameObject skin;
-    public float jumpForce = 5f; 
+    public float jumpForce = 16f; 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

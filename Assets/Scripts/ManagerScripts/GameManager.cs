@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public static bool gameStarted = false;
     public bool isPaused = false;
     public static int hi_score = 0;
-
+    public static float enemySpeed = 0.5f;
 
     public GameObject player;
     public static GameManager instance;
@@ -30,10 +30,20 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        if (!gameStarted)
+        {
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+            foreach (GameObject enemy in enemies)
+            {
+                enemy.GetComponent<EnemyMovement>().enabled = false;
+            }
+            player.GetComponent<PlayerMovement>().enabled = false;
+        }
         if (gameStarted)
         {
             StartGame();
         }
+        
     }
 
     void Awake()
@@ -43,6 +53,12 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<EnemyMovement>().enabled = true;
+        }
+        player.GetComponent<PlayerMovement>().enabled = true;
         gameStarted = true;
         hi_score_txt.text = "HI: " + hi_score;
         Vector3 new_cam_pos = new Vector3(-0.1f,4.7f,-11.8f);
@@ -62,14 +78,16 @@ public class GameManager : MonoBehaviour
             hi_score_txt.text = "HI: " + hi_score;
         }
 
-        if(score_value % 5 == 0)
+        if(score_value % 3 == 0)
         {
             SpawnEnemy();
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
-            foreach (GameObject enemy in enemies)
-            {
-                enemy.GetComponent<EnemyMovement>().speed += 1;
-            }
+            
+        }
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemySpeed += 0.1f;
+            enemy.GetComponent<EnemyMovement>().speed = enemySpeed;
         }
     }
 
@@ -120,6 +138,11 @@ public class GameManager : MonoBehaviour
         Vector3 enemy_spawn = new Vector3(rand_x, 10f, rand_z);
 
         Instantiate(enemy, enemy_spawn, Quaternion.identity);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("enemy");
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.GetComponent<EnemyMovement>().speed = enemySpeed;
+        }
     }
 
     public void speedIncrease()

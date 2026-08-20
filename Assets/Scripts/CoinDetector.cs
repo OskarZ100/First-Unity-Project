@@ -42,7 +42,7 @@ public class CoinDetector : MonoBehaviour
     {   
         Renderer renderer = GetComponent<Renderer>();
         System.Random rand = new System.Random();
-        int randomInt = rand.Next(0, 5); 
+        int randomInt = rand.Next(2, 5); 
         if(randomInt == 4)
         {
             isUpgrade = true;
